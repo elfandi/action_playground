@@ -36,6 +36,6 @@ jobs:
     - name: postgres apt repo
       run: sudo apt-get install -y wget gnupg
     - name: install postgres apt repo
-      run: sudo echo "deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
+      run: echo "deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main" | sudo tee -a /etc/apt/sources.list.d/pgdg.list
     - name: post postgres apt repo update apt
       run: sudo apt-get update -y -qq --fix-missing

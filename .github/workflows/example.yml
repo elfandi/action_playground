@@ -9,19 +9,15 @@ on:
       - main
 
 jobs:
-  examples:
-    name: ${{ matrix.examples }} example for pg${{ matrix.version }}
-    runs-on: ${{ matrix.os }}
+  main:
+    runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'nogha')"
-
-    strategy:
-      matrix:
-        version: [10, 11, 12, 13]
-        os: ["ubuntu-latest"]
-        examples: ["arrays", "bad_ideas", "bgworker", "bytea", "custom_types", "errors", "operators", "schemas", "shmem", "spi", "srf", "strings"]
-
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        id: setup-python
+        with:
+          python-version-file: pyproject.toml
 
     - name: cargo version
       run: cargo --version
@@ -29,27 +25,4 @@ jobs:
     # Ubuntu system dependencies for Postgres
     - name: remove old postgres
       run: sudo apt remove -y postgres*
-
-    # Update apt
-    - name: update apt
-      run: sudo apt-get update -y -qq --fix-missing
-    - name: postgres apt repo
-      run: sudo apt-get install -y wget gnupg
-    - name: install postgres apt repo
-      run: echo "deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main" | sudo tee -a /etc/apt/sources.list.d/pgdg.list
-    - name: preparation for install
-      run: |
-        sudo mkdir -m 0755 -p /etc/apt/keyrings/ 
-        wget -O- https://example.com/EXAMPLE.gpg |
-        gpg --dearmor |
-        sudo tee /etc/apt/keyrings/EXAMPLE.gpg > /dev/null
-        sudo chmod 644 /etc/apt/keyrings/EXAMPLE.gpg
-
-        echo "deb [signed-by=/etc/apt/keyrings/EXAMPLE.gpg] https://example.com/apt stable main" |
-        sudo tee /etc/apt/sources.list.d/EXAMPLE.list
-        sudo chmod 644 /etc/apt/sources.list.d/EXAMPLE.list
-
-        # Optional (you can find the email address / ID using 'apt-key list')
-        sudo apt-key del support@example.com
-    - name: post postgres apt repo update apt
-      run: sudo apt-get update -y -qq --fix-missing
+    

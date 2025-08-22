@@ -12,11 +12,17 @@ permissions: read-all
 jobs:
   build-openbsd:
     runs-on: ubuntu-latest
+    env:
+      variable-with-space: "a b"
     strategy:
       fail-fast: false
       matrix:
         goarch: [ppc64]
     steps:
+    - name: Echo
+      run: |
+        CARGO_FEATURES_OPTION='--features "${{ variable-with-space }}"'
+        echo ${{ CARGO_FEATURES_OPTION }}
     - uses: actions/checkout@v4
     - uses: actions/setup-go@v5
       with:

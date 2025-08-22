@@ -21,7 +21,7 @@ jobs:
     steps:
     - name: Echo
       run: |
-        CARGO_FEATURES_OPTION='--features "${{ goarch }}"'
+        CARGO_FEATURES_OPTION='--features "${{ matrix.goarch }}"'
         echo ${{ CARGO_FEATURES_OPTION }}
         PR=\"$V\"
         echo "$V"

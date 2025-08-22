@@ -13,21 +13,23 @@ jobs:
   build-openbsd:
     runs-on: ubuntu-latest
     env:
-      variable-with-space: "a b"
+      V: "a b"
     strategy:
       fail-fast: false
       matrix:
-        goarch: [ppc64]
+        goarch: ["ppc64 ppc64"]
     steps:
     - name: Echo
       run: |
-        CARGO_FEATURES_OPTION='--features "${{ variable-with-space }}"'
+        CARGO_FEATURES_OPTION='--features "${{ goarch }}"'
         echo ${{ CARGO_FEATURES_OPTION }}
-    - uses: actions/checkout@v4
-    - uses: actions/setup-go@v5
-      with:
-        go-version-file: .go-version
-    - name: Build for openbsd/${{ matrix.goarch }}
-      run: |
-        GOOS=openbsd GOARCH=${{ matrix.goarch }} go build ./...
+        PR=\"$V\"
+        echo "$V"
+    # - uses: actions/checkout@v4
+    # - uses: actions/setup-go@v5
+    #   with:
+    #     go-version-file: .go-version
+    # - name: Build for openbsd/${{ matrix.goarch }}
+    #   run: |
+    #     GOOS=openbsd GOARCH=${{ matrix.goarch }} go build ./...
           

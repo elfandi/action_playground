@@ -10,26 +10,18 @@ on:
 permissions: read-all
 
 jobs:
-  build-openbsd:
+  release:
     runs-on: ubuntu-latest
-    env:
-      V: "a b"
-    strategy:
-      fail-fast: false
-      matrix:
-        goarch: [ppc64]
     steps:
-    - name: Check Formatting with Prettier
-      uses: creyD/prettier_action@v4.3
-      with:
-        prettier_options: --check
-        files: |
-          **/*.js
-          **/*.css
-          **/*.md
-          **/*.json
-          nonexist.txt
-          go.mod
+      - uses: actions/checkout@v4
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v0.0.1
+          files: |
+            README.md
+            does-not-exist.zip
       
     #  run: |
     #    CARGO_FEATURES_OPTION='--features "${{ matrix.goarch }}"'

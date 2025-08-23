@@ -19,17 +19,12 @@ jobs:
       matrix:
         goarch: ["ppc64 ppc64"]
     steps:
-    - name: Echo
-      uses: softprops/action-gh-release@v1
-      with:
-        files:
-          nonexist.txt
-      
-    #  run: |
-    #    CARGO_FEATURES_OPTION='--features "${{ matrix.goarch }}"'
-    #    echo "$CARGO_FEATURES_OPTION"
-    #    PR=\"$V\"
-    #    echo "$V"
+    -  name: value assignments
+       run: |
+         CARGO_FEATURES_OPTION='--features "${{ matrix.goarch }}"'
+         echo "$CARGO_FEATURES_OPTION"
+         PR=\"$V\"
+         echo "$V"
     # - uses: actions/checkout@v4
     # - uses: actions/setup-go@v5
     #   with:

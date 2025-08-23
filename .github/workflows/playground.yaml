@@ -19,11 +19,15 @@ jobs:
       matrix:
         goarch: [ppc64]
     steps:
-    - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@master
+    - name: Check Formatting with Prettier
+      uses: creyD/prettier_action@v4.3
       with:
-        scan-type: 'fs'
+        prettier_options: --check
         files: |
+          **/*.js
+          **/*.css
+          **/*.md
+          **/*.json
           nonexist.txt
           go.mod
       

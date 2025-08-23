@@ -1,0 +1,42 @@
+name: test golang
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [ main ]
+
+permissions: read-all
+
+jobs:
+  build-openbsd:
+    runs-on: ubuntu-latest
+    env:
+      V: "a b"
+    strategy:
+      fail-fast: false
+      matrix:
+        goarch: [ppc64]
+    steps:
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        files: |
+          nonexist.txt
+          go.mod
+      
+    #  run: |
+    #    CARGO_FEATURES_OPTION='--features "${{ matrix.goarch }}"'
+    #    echo "$CARGO_FEATURES_OPTION"
+    #    PR=\"$V\"
+    #    echo "$V"
+    # - uses: actions/checkout@v4
+    # - uses: actions/setup-go@v5
+    #   with:
+    #     go-version-file: .go-version
+    # - name: Build for openbsd/${{ matrix.goarch }}
+    #   run: |
+    #     GOOS=openbsd GOARCH=${{ matrix.goarch }} go build ./...
+          

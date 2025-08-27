@@ -15,23 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v0.0.1
-          files: |
-            README.md
-            does-not-exist.zip
-      
-    #  run: |
-    #    CARGO_FEATURES_OPTION='--features "${{ matrix.goarch }}"'
-    #    echo "$CARGO_FEATURES_OPTION"
-    #    PR=\"$V\"
-    #    echo "$V"
-    # - uses: actions/checkout@v4
-    # - uses: actions/setup-go@v5
-    #   with:
-    #     go-version-file: .go-version
+    run: |
+       CARGO_FEATURES_OPTION='--features "${{ matrix.goarch }}"'
+       echo "$CARGO_FEATURES_OPTION"
+       PR=\"$V\"
+       echo "$V"
+    - uses: actions/checkout@v4
+    - uses: actions/setup-go@v5
+      with:
+        go-version-file: .go-version
     # - name: Build for openbsd/${{ matrix.goarch }}
     #   run: |
     #     GOOS=openbsd GOARCH=${{ matrix.goarch }} go build ./...

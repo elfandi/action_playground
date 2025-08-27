@@ -15,11 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-    run: |
-       CARGO_FEATURES_OPTION='--features "${{ matrix.goarch }}"'
-       echo "$CARGO_FEATURES_OPTION"
-       PR=\"$V\"
-       echo "$V"
+    # run: |
+    #    CARGO_FEATURES_OPTION='--features "${{ matrix.goarch }}"'
+    #    echo "$CARGO_FEATURES_OPTION"
+    #    PR=\"$V\"
+    #    echo "$V"
     - uses: actions/checkout@v4
     - uses: actions/setup-go@v5
       with:

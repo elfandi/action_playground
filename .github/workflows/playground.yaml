@@ -20,10 +20,15 @@ jobs:
     #    echo "$CARGO_FEATURES_OPTION"
     #    PR=\"$V\"
     #    echo "$V"
-    - uses: actions/checkout@v4
-    - uses: actions/setup-go@v5
-      with:
-        go-version-file: .go-version
+      - uses: actions/checkout@v4
+
+      - name: Delete something not exist
+        run: |
+          sudo apt-get remove -y '^dotnet-.*'
+    
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: .go-version
     # - name: Build for openbsd/${{ matrix.goarch }}
     #   run: |
     #     GOOS=openbsd GOARCH=${{ matrix.goarch }} go build ./...

@@ -24,8 +24,8 @@ jobs:
 
       - name: Delete something not exist
         run: |
-          sudo apt-get remove -y '^dotnet-.*'
-          sudo apt-get remove -y azure-cli google-cloud-sdk hhvm google-chrome-stable firefox powershell mono-devel libgl1-mesa-dri
+          # sudo apt-get remove -y '^dotnet-.*'
+          # sudo apt-get remove -y azure-cli google-cloud-sdk hhvm google-chrome-stable firefox powershell mono-devel libgl1-mesa-dri
           echo "Removing large directories"
           sudo rm -rf /usr/share/dotnet/
           sudo rm -rf /usr/local/graalvm/
@@ -41,4 +41,16 @@ jobs:
     # - name: Build for openbsd/${{ matrix.goarch }}
     #   run: |
     #     GOOS=openbsd GOARCH=${{ matrix.goarch }} go build ./...
+
+  release2:
+    runs-on: ubuntu-latest
+    steps:
+    
+      - uses: actions/checkout@v4
+      - name: Another workflow
+        run: |
+          echo "another workflow?"
+      
+    
+    
           

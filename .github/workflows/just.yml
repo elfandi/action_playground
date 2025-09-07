@@ -30,6 +30,9 @@ jobs:
         with:
           tool: just
 
+      - name: what shell
+        run: just what-shell
+
       - name: tests
         timeout-minutes: 60
         run: just test    

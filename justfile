@@ -15,3 +15,9 @@ all_crate_features := if os() == "linux" {
 test toolchain="":
     echo {{ toolchain }}
     echo {{ all_crate_features }}
+
+what-shell:
+    @echo "The command used to launch this shell is: {{ just }}"
+    @echo "The default shell set in the Justfile is determined by 'set shell'"
+    # 这会调用 shell 来执行 ‘echo $0’，从而显示自己
+    echo "But the actual shell process running this recipe is: $0"

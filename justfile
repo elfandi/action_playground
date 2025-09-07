@@ -2,7 +2,6 @@ _list:
     @just --list
 
 [private]
-
 non_linux_all_features_list := ```
     echo '[{"name":"JSON", "good":true}, {"name":"XML", "good":false}]' | jq '.[1]'
 ```

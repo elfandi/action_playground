@@ -1,4 +1,4 @@
-iname: test just
+name: test just
 
 on:
   push:
@@ -9,10 +9,14 @@ jobs:
   build_and_test:
     strategy:
       matrix:
-        target:
+        include:
           - { name: Linux, os: ubuntu-latest, triple: x86_64-unknown-linux-gnu }
           - { name: macOS, os: macos-latest, triple: x86_64-apple-darwin }
           - { name: Windows, os: windows-latest, triple: x86_64-pc-windows-msvc }
+
+    name: ${{ matrix.target.name }}
+    runs-on: ${{ matrix.target.os }}
+    
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 

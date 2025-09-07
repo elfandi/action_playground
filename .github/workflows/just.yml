@@ -1,0 +1,30 @@
+iname: test just
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_test:
+    strategy:
+      matrix:
+        target:
+          - { name: Linux, os: ubuntu-latest, triple: x86_64-unknown-linux-gnu }
+          - { name: macOS, os: macos-latest, triple: x86_64-apple-darwin }
+          - { name: Windows, os: windows-latest, triple: x86_64-pc-windows-msvc }
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Install nasm
+        if: matrix.target.os == 'windows-latest'
+        uses: ilammy/setup-nasm@72793074d3c8cdda771dba85f6deafe00623038b # v1.5.2
+
+      - name: Install just
+        uses: taiki-e/install-action@14083e64ac8cf1f5e54356df00b9779b23e192a1 # v2.58.29
+        with:
+          tool: just
+
+      - name: tests
+        timeout-minutes: 60
+        run: just test    

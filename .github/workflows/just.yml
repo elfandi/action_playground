@@ -36,3 +36,10 @@ jobs:
       - name: tests
         timeout-minutes: 60
         run: just test    
+
+      - name: Check default shell
+        run: |
+          echo "Running in: $env:ComSpec"
+          echo "Process name: $PSVersionTable.PSEdition"
+          # 或者更简单的方式
+          echo "This is PowerShell version: $($PSVersionTable.PSVersion)"

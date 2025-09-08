@@ -23,7 +23,7 @@ jobs:
 
       - name: Install OpenSSL
         if: matrix.target.os == 'windows-latest'
-        run: choco install openssl
+        run: choco install openssl -y --forcex64 --no-progress --version=3.2.1
 
       - name: Install just
         uses: taiki-e/install-action@14083e64ac8cf1f5e54356df00b9779b23e192a1 # v2.58.29

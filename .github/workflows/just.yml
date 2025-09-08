@@ -27,7 +27,7 @@ jobs:
 
       - name: show OpenSSL Path
         if: matrix.target.os == 'windows-latest'
-        run: dir 'C:/' /AD /s OpenSSL
+        run: dir 'C:\' /AD /s OpenSSL
 
       - name: Install just
         uses: taiki-e/install-action@14083e64ac8cf1f5e54356df00b9779b23e192a1 # v2.58.29

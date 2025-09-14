@@ -19,6 +19,3 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-  
-      - name: check pnpm version
-        run: pnpm --version
